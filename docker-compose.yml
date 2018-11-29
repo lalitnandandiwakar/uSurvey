@@ -1,0 +1,54 @@
+version: '2'
+
+services:
+
+  usurvey_app:
+    extends:
+      file: usurvey-apps.yml
+      service: usurvey_base
+    command: gunicorn -b 0.0.0.0:3691 --workers=$USURVEY_APP_WORKERS  --max-requests $USURVEY_APP_MAX_REQUESTS --timeout $USURVEY_APP_TIMEOUT mics.wsgi
+    ports:
+      - "$USURVEY_APP_PORT:3691"
+    depends_on:
+      - redis_server
+      - db
+
+  background_task_workers:
+    extends:
+      file: usurvey-apps.yml
+      service: usurvey_base
+    command: ./manage.py rqworker default email results-queue ws-notice odk
+    depends_on:
+      - redis_server
+      - db
+
+  background_task_schedulers:
+    extends:
+      file: usurvey-apps.yml
+      service: usurvey_base
+    command: ./manage.py rqscheduler ws-notice
+    depends_on:
+      - redis_server
+      - db
+
+  db:
+    environment:
+      # pls replace with your own values
+      POSTGRES_DB: ${USURVEY_DB}
+      POSTGRES_USER: ${USURVEY_DB_USER}
+      POSTGRES_PASSWORD: ${USURVEY_DB_PASS}
+    restart: always
+    image: postgres:alpine
+    ports:
+      - "$USURVEY_DB_PORT:5432"
+    volumes:
+      - ${POSTGRES_DATA_PATH}:/var/lib/postgresql/data
+
+  redis_server:
+    restart: always
+    image: redis:alpine
+    ports:
+      - "$USURVEY_REDIS_PORT:6379"
+
+
+

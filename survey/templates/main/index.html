@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load repeatedblocks %}
+{% load template_tags %}
+
+{% block page_title %}HOME{%endblock%}
+
+
+{% block extra_slider %}
+{% include 'slideshow.html' %}
+{% endblock %}
+
+{% block extra_content %}
+<section name="content-block" class="commonSection " style="background-color: #ffffff; background-repeat: no-repeat; ">
+    <div class="container">
+        <div class="fw-row">
+            <div class="fw-col-xs-12 fw-col-xs-12" style=" text-align: left!important;  ">
+                <div class="col-lg-10 col-lg-offset-1 col-sm-offset-1 col-sm-10 col-xs-12 text-center">
+                    <div class="secTriangle">
+                        <img src="{{STATIC_URL}}images/slider3.png"  style="background-position: center center; background-repeat: no-repeat; height: 40px;margin-left: auto; margin-right: auto; position: relative; width: 80px; z-index: 9999;
+                            ">
+                    </div>
+                    <div class="singleTesti">
+                        <h2 style="color:#002956; font-family:'Baloo Bhaina',cursive;">uSurvey</h2>
+                    </div>
+                    <div data-ride="carousel" class="carousel slide" id="testiCarousel">
+                        <div role="listbox" class="carousel-inner">
+                            <div class="item active">
+                                <div class="quote noPaddingBottom">
+                                    <p class="" style="color:#0099ff;  font-weight:400; font-family: 'Open Sans'letter-spacing:1px; font-size:16px;">
+                                        "uSurvey is an innovative data collection tool designed to provide statistically representative real time estimates of a given indicator. It runs on USSD interactive secured channel and on ODK, for off-line data collection in locations with intermittent mobile network connections."  
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section name="3-blocks">
+    <div class="pageWrapper">
+      <div class="pageContent blog-home" style="">
+            <div class="md-padding">
+          <div class="container">
+            <div class="container">
+            
+            <div class="heading main centered">
+              <h2 class="lg-title" style="color:#002956; font-family:'Baloo Bhaina',cursive;">Discover</h2><b class="head-sep"><u></u></b><b class="head-sep"><u></u></b><b class="head-sep"><u></u></b>
+              <p>UNICEF Uganda, in partnership with the Uganda Bureau of Statistics (UBOS), developed uSurvey to conduct official structured surveys and assessments....<span style="padding-left: 3px; color: red;"><a href="https://usurvey.readthedocs.io/" target="new">More</a></span></p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="icon-box lg-icon t-center light-gry-border rect-angles">
+                  <span><span><span><span><span><span><span><span><span><i ><img src="{{ STATIC_URL }}images/ussd.png" width="115" height="86"></i>
+                  <h4 class="uppercase" style="color:#0059d0;">USSD & ODK CHANNELS</h4><p class="m-b-3">uSurvey enables real-time data collection and storage using mobile device (tablet/phone) through via USSD and ODK...</p><a class="btn main-bg uppercase" href="{% url 'about_page' %}">READ More</a></span></span></span></span></span></span></span></span></span>                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="icon-box lg-icon t-center light-gry-border rect-angles">
+                  <span><span><span><span><span><span><span><span><span><i><img src="{{ STATIC_URL }}images/real.png" width="167" height="86"></i>
+                  <h4 class="uppercase" style="color:#0059d0;">REAL TIME MONITORING</h4><p class="m-b-3">uSurvey eliminates the use of paper questionnaires and associated delays in the release of survey results often...</p><a class="btn main-bg uppercase" href="{% url 'about_page' %}">READ More</a></span></span></span></span></span></span></span></span></span>                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="icon-box lg-icon t-center light-gry-border rect-angles">
+                  <span><span><span><span><span><span><span><span><span><i ><img src="{{ STATIC_URL }}images/oupput.png" width="169" height="86"></i>
+                  <h4 class="uppercase" style="color:#0059d0;">SAMPLE & CENSUS SURVEY</h4><p class="m-b-3">uSurvey possesses in-built capabilities to randomly select a representative sample from a population of inter...</p><a class="btn main-bg uppercase" href="{% url 'about_page' %}">READ More</a></span></span></span></span></span></span></span></span></span>
+                </div>
+              </div>
+              
+            </div>
+          </div> </div>
+        </div>
+          
+      </div>        
+    
+
+    </div>
+</section>
+
+<section class="project-section">
+    <div class="container">
+        <div class="theme-title">
+            <h4 style="color: #0059d0;" class="uppercase">Success Stories</h4>
+            <span>&nbsp;</span>
+        </div>
+        <div class="row">
+            <div class="project-slider project-single-content">
+                {% for each in ss_list %}
+                <div class="item">
+                    <div class="single-project">
+                        <div class="img">
+                            <img src="/media/{{each.image}}" alt="Image">
+                            <div class="opacity"></div>
+                            <ul class="icon">
+                                <li><a href="{% url 'home_success_story_list' %}#{{each.id}}" class="tran3s" title="View details"><i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="text">
+                            <h4><a href="{% url 'home_success_story_list' %}#{{each.id}}" class="tran3s">{{each.name}}</a></h4>
+                        {{each.content|safe}}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+          <!--       <div class="item">
+                    <div class="single-project">
+                        <div class="img">
+                            <img src="{{ STATIC_URL }}success/images/project/2.jpg" alt="Image">
+                            <div class="opacity"></div>
+                            <ul class="icon">
+                                <li><a href="{% url 'home_success_story_list' %}" class="tran3s" title="View details"><i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            <h4><a href="{% url 'home_success_story_list' %}#2" class="tran3s">Surveying made Easy</a></h4>
+                            <p>Ms. Flavia Ouma, Senior IT Officer of Uganda Bureau of Statistics (UBOS) demonstrating the uSurvey application to a field worker during the field testing of the system for Female Genital </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="single-project">
+                        <div class="img">
+                            <img src="{{ STATIC_URL }}success/images/project/3.png" alt="Image">
+                            <div class="opacity"></div>
+                            <ul class="icon">
+                                <li><a href="{% url 'home_success_story_list' %}" class="tran3s" title="View details"><i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            <h4><a href="{% url 'home_success_story_list' %}#3" class="tran3s">Use of uSurvey in Uganda</a></h4>
+                            <p>Maiden use of the system in early 2016 enabled UNICEF and UBOS to obtain real-time data from 4,500 respondents, allowing for a presentation of preliminary results just three days after the fieldwork...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="single-project">
+                        <div class="img">
+                            <img src="{{ STATIC_URL }}success/images/project/12.png" alt="Image">
+                            <div class="opacity"></div>
+                            <ul class="icon">
+                                <li><a href="{% url 'home_success_story_list' %}" class="tran3s" title="View details"><i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            <h4><a href="{% url 'home_success_story_list' %}#4" class="tran3s">Business Advantages of uSurvey</a></h4>
+                            <p>Generic system that can be used for any survey or census with defined parameters during survey set-up (uSurvey has a bank of standard questions that can be added to)</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}
+
+{% block extra_js %}
+
+<script type="text/javascript" src="{{ STATIC_URL }}success/vendor/owl-carousel/owl.carousel.min.js"></script>
+
+<script type="text/javascript" src="/static/success/js/theme.js"></script>
+
+{%endblock%}
+
+
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="/static/success/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/success/css/responsive.css">
+<style type="text/css">
+     #cssmenu > ul > li .home {
+    color: yellow;
+}    
+</style>
+
+{%endblock%}
